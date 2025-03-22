@@ -8,11 +8,14 @@ import {
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/userSlice";
 
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [formError, setFormError] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //Refrencing the value
 
@@ -68,6 +71,15 @@ const Login = () => {
             photoURL: "https://avatars.githubusercontent.com/u/113576074?v=4",
           })
             .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
               navigate("/browse");
             })
             .catch((error) => {

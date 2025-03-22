@@ -27,7 +27,11 @@ const Header = () => {
 
       {user && (
         <div className="flex p-2">
-          <img src={user?.photoURL} alt="user-icon" className="w-12 h-12"></img>
+          <img
+            src={user?.photoURL}
+            alt="user-icon"
+            className="w-12 h-12 mx-4"
+          ></img>
           <button
             className="font-bold text-white cursor-pointer "
             onClick={handleSignOut}
