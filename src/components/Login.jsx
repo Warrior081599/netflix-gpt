@@ -1,10 +1,18 @@
 import Header from "./Header";
 import { useState, useRef } from "react";
 import { validateData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
 
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [formError, setFormError] = useState(null);
+  const navigate = useNavigate();
 
   //Refrencing the value
 
@@ -31,12 +39,63 @@ const Login = () => {
         fullName.current.value
       );
       setFormError(erroInForm);
-    } else {
+    } else if (isSignedIn) {
       const erroInForm = validateData(
         email.current.value,
         password.current.value
       );
       setFormError(erroInForm);
+    } else {
+      setFormError(null);
+    }
+
+    if (formError) {
+      return;
+    }
+
+    if (!isSignedIn) {
+      //Sign-up
+
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: fullName.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/113576074?v=4",
+          })
+            .then(() => {
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setFormError(error.message);
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setFormError(errorCode + "-" + errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate("/browse");
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setFormError(errorCode + "-" + errorMessage);
+        });
     }
   };
 
@@ -80,7 +139,7 @@ const Login = () => {
         <p className="text-lg text-red-600 font-bold">{formError}</p>
 
         <button
-          className="p-4 my-6 w-full bg-red-700 rounded-lg "
+          className="p-4 my-6 w-full bg-red-700 rounded-lg cursor-pointer "
           onClick={handleButtonClick}
         >
           {isSignedIn ? "Sign In" : "Sign Up"}
