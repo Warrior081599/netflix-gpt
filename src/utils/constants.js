@@ -3,3 +3,12 @@ export const LOGO_URL =
 
 export const PROFILE_PIC_URL =
   "https://wallpapers.com/images/high/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.webp";
+
+export const NOW_PLAYING_OPTIONS = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc5OWJkZDFhYzViMGY5YTYxMGQ1YTFiNzhiOTMxZCIsIm5iZiI6MTc0MjczODY0NC4zNzYsInN1YiI6IjY3ZTAxNGQ0YjhlMGZlYTkzNDA3ZTkxNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NX8AsgaHClgLJ7XiR3lwtQCtb_YJUAK9vd37LJyYMm4",
+  },
+};
