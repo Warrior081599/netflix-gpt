@@ -25,4 +25,4 @@ dist-ssr
 *.sw?
 
 # Environment and API keys
-# src/utils/constants.js
+ src/utils/constants.js
