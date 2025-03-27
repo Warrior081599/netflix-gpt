@@ -9,6 +9,8 @@ import { useAiringTodayTv } from "../hooks/useAiringTodayTv";
 import { useOnTheAirTv } from "../hooks/useOnTheAirTv";
 import { usePopularTv } from "../hooks/usePopularTv";
 import { useTopRatedTv } from "../hooks/useTopRatedTv";
+import { useSelector } from "react-redux";
+import GptSearch from "./GptSearch";
 
 const Browse = () => {
   useNowPlayingMovies();
@@ -20,11 +22,18 @@ const Browse = () => {
   usePopularTv();
   useTopRatedTv();
 
+  const gptSearchValue = useSelector((store) => store.gpt.showGptSearch);
+
   return (
     <div className="">
       <Header />
-      <MainContainer />
-      <SecondaryContainer />
+      {!gptSearchValue && (
+        <>
+          <MainContainer />
+          <SecondaryContainer />
+        </>
+      )}
+      {gptSearchValue && <GptSearch />}
     </div>
   );
 };

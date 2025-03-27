@@ -10,6 +10,7 @@ import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
 import { PROFILE_PIC_URL } from "../utils/constants";
+import { BACKGROUND_IMG_URL } from "../utils/constants";
 
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
@@ -112,10 +113,7 @@ const Login = () => {
     <div className=" ">
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/50fcc930-ba3f-4cae-9257-9f920e30a998/web/IN-en-20250310-TRIFECTA-perspective_739387a0-ff14-44ed-a5af-36e5aa4d236e_large.jpg"
-          alt="netflix-bg-img"
-        />
+        <img src={BACKGROUND_IMG_URL} alt="netflix-bg-img" />
       </div>
       <form
         className="absolute w-3/12 p-12 bg-black/80 my-36 mx-auto right-0 left-0 text-white rounded-lg "
