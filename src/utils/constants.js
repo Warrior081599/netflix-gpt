@@ -32,3 +32,5 @@ export const SUPPORTED_LANGUAGE = [
     name: "Spanish",
   },
 ];
+
+export const GEMINI_KEY = "AIzaSyDjnQs2zcEIGpW2enBuzAfwLmrPM5YaPsE";

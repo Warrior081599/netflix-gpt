@@ -59,8 +59,8 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
-      <img src={LOGO_URL} alt="netflix-logo" className="w-44" />
+    <div className="absolute w-full h-30 px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
+      <img src={LOGO_URL} alt="netflix-logo" className="w-44 h-20" />
 
       {user && (
         <div className="flex p-2">
@@ -82,14 +82,14 @@ const Header = () => {
           </div>
           <button
             onClick={handleGptSearch}
-            className="bg-purple-700 rounded-lg  px-8  m-2 cursor-pointer  text-white"
+            className="bg-purple-700 rounded-lg  px-8 h-13  mt-5 cursor-pointer  text-white"
           >
-            {gptSearchValue ? "Homepage" : "Gpt Search"}
+            {gptSearchValue ? "Homepage" : "AI Recommended Movies"}
           </button>
           <img
             src={user?.photoURL}
             alt="user-icon"
-            className="w-12 h-12 mx-4"
+            className="w-12 h-12 mx-4 my-5"
           ></img>
           <button
             className="font-bold text-white cursor-pointer "
