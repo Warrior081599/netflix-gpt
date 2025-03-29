@@ -2,16 +2,23 @@ import lang from "../utils/languageConstants";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { useMovieSuggestionGemini } from "../hooks/useMovieSuggestionGemini";
+import { useState } from "react";
 
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.config.lang);
   const inputRef = useRef(null);
+  const [inputData, setInputData] = useState(null);
 
-  const searchText = inputRef.current.value ? inputRef.current.value : " ";
-  const movieSuggestionFromGemini = useMovieSuggestionGemini(searchText);
+  const { getMovieSuggestionGemini, loading } = useMovieSuggestionGemini();
 
-  const handleGptClick = () => {
-    movieSuggestionFromGemini();
+  const handleGptClick = async () => {
+    if (inputRef.current?.value) {
+      setInputData(inputRef.current.value);
+      console.log("Input Box: ", inputRef.current.value);
+      console.log("Input state variable: ", inputData);
+      const movieDataFromGemini = await getMovieSuggestionGemini(inputData);
+      console.log("MovieData From Gemini: ", movieDataFromGemini);
+    }
   };
 
   return (
