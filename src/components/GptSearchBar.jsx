@@ -2,22 +2,47 @@ import lang from "../utils/languageConstants";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { useMovieSuggestionGemini } from "../hooks/useMovieSuggestionGemini";
-import { useState } from "react";
+import { useSearchTmdbMovie } from "../hooks/useSearchTmdbMovie";
+import { useDispatch } from "react-redux";
+import { setMoviesByGeminiAndTmdbSearch } from "../store/gptSlice";
 
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.config.lang);
   const inputRef = useRef(null);
-  const [inputData, setInputData] = useState(null);
+  const dispatch = useDispatch();
 
-  const { getMovieSuggestionGemini, loading } = useMovieSuggestionGemini();
+  //Movie given by Gemini
+  const { getMovieSuggestionGemini, loading, error, errorDetails } =
+    useMovieSuggestionGemini();
+
+  //Movie given by TMDB Search
+  const { SearchTmdbMovie, tmdbLoading } = useSearchTmdbMovie();
 
   const handleGptClick = async () => {
     if (inputRef.current?.value) {
-      setInputData(inputRef.current.value);
-      console.log("Input Box: ", inputRef.current.value);
-      console.log("Input state variable: ", inputData);
+      const inputData = inputRef.current.value;
+
       const movieDataFromGemini = await getMovieSuggestionGemini(inputData);
-      console.log("MovieData From Gemini: ", movieDataFromGemini);
+      const movieDataFromGeminiArray = movieDataFromGemini.split(",");
+      console.log(movieDataFromGeminiArray);
+
+      //Here will try to call the TMDB api for all the 5 movies
+
+      const tmdbPromise = movieDataFromGeminiArray.map((movie) =>
+        SearchTmdbMovie(movie)
+      );
+      const tmdbResult = await Promise.all(tmdbPromise);
+      console.log(tmdbResult);
+      dispatch(
+        setMoviesByGeminiAndTmdbSearch({
+          moviesNamesByGemini: movieDataFromGeminiArray,
+          moviesNamesByTmdbSearch: tmdbResult,
+          loadingGemini: loading,
+          errorGemini: error,
+          errorDetailsGemini: errorDetails,
+          loadingTmdb: tmdbLoading,
+        })
+      );
     }
   };
 

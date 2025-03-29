@@ -3,6 +3,8 @@ import model from "../utils/gemini";
 
 export const useMovieSuggestionGemini = () => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorDetails, setErrorDetails] = useState(null);
 
   const getMovieSuggestionGemini = async (searchText) => {
     if (!searchText.trim()) {
@@ -28,10 +30,15 @@ export const useMovieSuggestionGemini = () => {
       // --- Basic error logging ---
       console.error("!!! Error calling Gemini API !!!");
       console.error(err);
+      setError(true);
+      setErrorDetails(err);
+      setLoading(false);
     } finally {
       setLoading(false);
+      setError(false);
+      setErrorDetails(null);
     }
   };
 
-  return { getMovieSuggestionGemini, loading };
+  return { getMovieSuggestionGemini, loading, error, errorDetails };
 };
