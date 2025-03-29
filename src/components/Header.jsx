@@ -10,6 +10,7 @@ import { LOGO_URL } from "../utils/constants";
 import { toggleGptSearch } from "../store/gptSlice";
 import { SUPPORTED_LANGUAGE } from "../utils/constants";
 import { changeLanguage } from "../store/configSlice";
+import { setMoviesByGeminiAndTmdbSearch } from "../store/gptSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -52,6 +53,12 @@ const Header = () => {
 
   const handleGptSearch = () => {
     dispatch(toggleGptSearch());
+    dispatch(
+      setMoviesByGeminiAndTmdbSearch({
+        moviesNamesByGemini: null,
+        moviesNamesByTmdbSearch: null,
+      })
+    );
   };
 
   const handleLanguageSelect = (e) => {

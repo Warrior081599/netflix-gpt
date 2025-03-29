@@ -44,6 +44,7 @@ const GptSearchBar = () => {
         })
       );
     }
+    inputRef.current.value = "";
   };
 
   return (
