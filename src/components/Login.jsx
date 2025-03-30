@@ -113,10 +113,14 @@ const Login = () => {
     <div className=" ">
       <Header />
       <div className="absolute">
-        <img src={BACKGROUND_IMG_URL} alt="netflix-bg-img" />
+        <img
+          src={BACKGROUND_IMG_URL}
+          alt="netflix-bg-img"
+          className="h-screen object-cover"
+        />
       </div>
       <form
-        className="absolute w-3/12 p-12 bg-black/80 my-36 mx-auto right-0 left-0 text-white rounded-lg "
+        className="absolute w-full md:w-3/12 p-12 bg-black/80 my-36 mx-auto right-0 left-0 text-white rounded-lg "
         onSubmit={handleSubmit}
       >
         <h1 className="font-bold text-3xl py-4">
@@ -146,7 +150,7 @@ const Login = () => {
         <p className="text-lg text-red-600 font-bold">{formError}</p>
 
         <button
-          className="p-4 my-6 w-full bg-red-700 rounded-lg cursor-pointer "
+          className="p-4 my-6 w-full bg-red-700 rounded-lg cursor-pointer transition duration-300 ease-in-out hover:scale-105 active:scale-108 "
           onClick={handleButtonClick}
         >
           {isSignedIn ? "Sign In" : "Sign Up"}
@@ -155,7 +159,7 @@ const Login = () => {
         <p className="text-gray-400">
           {isSignedIn ? "New to Netflix?" : "Existing User?"}{" "}
           <span
-            className="text-white cursor-pointer hover:underline"
+            className="text-white cursor-pointer hover:underline "
             onClick={handleSignIn}
           >
             {isSignedIn ? "Sign up now." : "Please Login."}
