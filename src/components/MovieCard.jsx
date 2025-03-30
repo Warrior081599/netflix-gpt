@@ -1,14 +1,14 @@
 import { MOVIE_IMAGE_URL } from "../utils/constants";
-import { useDispatch } from "react-redux";
-import { setSelectedMovie } from "../store/movieSlice";
+
+import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({ posterPath, title, movieId }) => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (!posterPath) return null;
 
   const handleMovieClick = () => {
-    dispatch(setSelectedMovie(movieId));
+    navigate(`/watch/${movieId}`);
   };
 
   return (
