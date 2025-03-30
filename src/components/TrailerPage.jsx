@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useMovieTrailer } from "../hooks/useMovieTrailer";
 import { useSelector, useDispatch } from "react-redux";
 import { clearTrailerVideo } from "../store/movieSlice";
@@ -7,23 +7,40 @@ import Header from "./Header";
 
 const TrailerPage = () => {
   const { movieId } = useParams();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  useMovieTrailer(movieId);
   const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
+  const navigate = useNavigate();
+
+  // Log the movieId to confirm it's being extracted correctly
+  console.log("TrailerPage mounted with movieId:", movieId);
 
   // Fetch trailer when component mounts
-  useMovieTrailer(movieId);
+  useEffect(() => {
+    console.log("Fetching trailer for movie ID:", movieId);
+    // No cleanup necessary in this effect
+  }, [movieId]);
 
-  // Clean up when component unmounts
+  // Use a separate effect for cleanup
   useEffect(() => {
     return () => {
+      console.log("TrailerPage unmounting, cleaning up");
       dispatch(clearTrailerVideo());
     };
   }, [dispatch]);
 
-  const handleBack = () => {
-    navigate("/browse");
-  };
+  if (!movieId) {
+    return (
+      <div className="bg-black min-h-screen text-white p-24">
+        <p>Missing movie ID parameter</p>
+        <Link to="/browse" className="text-blue-500 underline">
+          Back to Browse
+        </Link>
+      </div>
+    );
+  }
+
+  // Attempt to fetch the trailer
 
   return (
     <div className="bg-black min-h-screen">
@@ -31,8 +48,8 @@ const TrailerPage = () => {
 
       <div className="pt-24 px-4">
         <button
-          onClick={handleBack}
-          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-4 transition duration-300"
+          onClick={() => navigate("/browse")}
+          className=" text-lg  bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-4 transition duration-300 cursor-pointer "
         >
           ← Back to Browse
         </button>

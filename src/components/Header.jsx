@@ -27,6 +27,7 @@ const Header = () => {
 
   const gptSearchValue = useSelector((store) => store.gpt.showGptSearch);
 
+  // In Header.jsx useEffect
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -39,7 +40,10 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
-        navigate("/browse");
+        // ONLY navigate to /browse if we're on the login page
+        if (window.location.pathname === "/") {
+          navigate("/browse");
+        }
       } else {
         dispatch(removeUser());
         navigate("/");

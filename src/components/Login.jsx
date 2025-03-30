@@ -116,7 +116,7 @@ const Login = () => {
         <img
           src={BACKGROUND_IMG_URL}
           alt="netflix-bg-img"
-          className="h-screen object-cover"
+          className="h-screen w-screen object-cover"
         />
       </div>
       <form
