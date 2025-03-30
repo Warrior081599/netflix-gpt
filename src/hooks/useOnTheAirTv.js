@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addOnTheAirTv } from "../store/movieSlice";
 import { NOW_PLAYING_OPTIONS } from "../utils/constants";
+import { useSelector } from "react-redux";
 
 export const useOnTheAirTv = () => {
   const dispatch = useDispatch();
+  const airTv = useSelector((store) => store.movies.onTheAirTv);
 
   const onAirTv = async () => {
     try {
@@ -20,6 +22,6 @@ export const useOnTheAirTv = () => {
   };
 
   useEffect(() => {
-    onAirTv();
+    if (!airTv) onAirTv();
   }, []);
 };

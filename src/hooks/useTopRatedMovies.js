@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { NOW_PLAYING_OPTIONS } from "../utils/constants";
 import { addTopRatedMovies } from "../store/movieSlice";
+import { useSelector } from "react-redux";
 
 export const useTopRatedMovies = () => {
   const dispatch = useDispatch();
+  const topMovies = useSelector((store) => store.movies.topRatedMovies);
 
   const topRatedMovie = async () => {
     try {
@@ -20,6 +22,6 @@ export const useTopRatedMovies = () => {
   };
 
   useEffect(() => {
-    topRatedMovie();
+    if (!topMovies) topRatedMovie();
   }, []);
 };

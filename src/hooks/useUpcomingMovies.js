@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addUpcomingMovies } from "../store/movieSlice";
 import { NOW_PLAYING_OPTIONS } from "../utils/constants";
+import { useSelector } from "react-redux";
 
 export const useUpcomingMovies = () => {
   const dispatch = useDispatch();
+  const movies = useSelector((store) => store.movies.upcomingMovies);
 
   const upcomingMovies = async () => {
     try {
@@ -20,6 +22,6 @@ export const useUpcomingMovies = () => {
   };
 
   useEffect(() => {
-    upcomingMovies();
+    if (!movies) upcomingMovies();
   }, []);
 };

@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addPopularTv } from "../store/movieSlice";
 import { NOW_PLAYING_OPTIONS } from "../utils/constants";
+import { useSelector } from "react-redux";
 
 export const usePopularTv = () => {
   const dispatch = useDispatch();
+  const popular = useSelector((store) => store.movies.popularTv);
 
   const popularTv = async () => {
     try {
@@ -20,6 +22,6 @@ export const usePopularTv = () => {
   };
 
   useEffect(() => {
-    popularTv();
+    if (!popular) popularTv();
   }, []);
 };

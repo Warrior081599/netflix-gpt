@@ -1,10 +1,7 @@
 import { NOW_PLAYING_OPTIONS } from "../utils/constants";
-import { useState } from "react";
 
 export const useSearchTmdbMovie = () => {
-  const [tmdbLoading, setTmdbLoading] = useState(false);
   const SearchTmdbMovie = async (movie) => {
-    setTmdbLoading(true);
     try {
       const result = await fetch(
         "https://api.themoviedb.org/3/search/movie?query=" +
@@ -16,10 +13,8 @@ export const useSearchTmdbMovie = () => {
       return output;
     } catch (err) {
       console.log(err);
-    } finally {
-      setTmdbLoading(false);
     }
   };
 
-  return { SearchTmdbMovie, tmdbLoading };
+  return { SearchTmdbMovie };
 };

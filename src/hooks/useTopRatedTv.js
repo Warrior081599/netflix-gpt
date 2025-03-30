@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTopRatedTv } from "../store/movieSlice";
 import { NOW_PLAYING_OPTIONS } from "../utils/constants";
 
 export const useTopRatedTv = () => {
   const dispatch = useDispatch();
+  const topTv = useSelector((store) => store.movies.topRatedTv);
 
   const topRatedTv = async () => {
     try {
@@ -20,6 +21,6 @@ export const useTopRatedTv = () => {
   };
 
   useEffect(() => {
-    topRatedTv();
+    if (!topTv) topRatedTv();
   }, []);
 };

@@ -8,8 +8,7 @@ export const NOW_PLAYING_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc5OWJkZDFhYzViMGY5YTYxMGQ1YTFiNzhiOTMxZCIsIm5iZiI6MTc0MjczODY0NC4zNzYsInN1YiI6IjY3ZTAxNGQ0YjhlMGZlYTkzNDA3ZTkxNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NX8AsgaHClgLJ7XiR3lwtQCtb_YJUAK9vd37LJyYMm4",
+    Authorization: "Bearer " + import.meta.env.VITE_TMDB_KEY,
   },
 };
 
@@ -33,4 +32,4 @@ export const SUPPORTED_LANGUAGE = [
   },
 ];
 
-export const GEMINI_KEY = "AIzaSyDjnQs2zcEIGpW2enBuzAfwLmrPM5YaPsE";
+export const GEMINI_KEY = import.meta.env.VITE_GEMINI_KEY;

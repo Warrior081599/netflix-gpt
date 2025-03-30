@@ -2,7 +2,6 @@ import { useState } from "react";
 import model from "../utils/gemini";
 
 export const useMovieSuggestionGemini = () => {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorDetails, setErrorDetails] = useState(null);
 
@@ -19,7 +18,6 @@ export const useMovieSuggestionGemini = () => {
 
     try {
       // --- Make the API Call using 'model' ---
-      setLoading(true);
 
       const result = await model.generateContent(geminiQuery);
       const response = await result.response;
@@ -32,13 +30,11 @@ export const useMovieSuggestionGemini = () => {
       console.error(err);
       setError(true);
       setErrorDetails(err);
-      setLoading(false);
     } finally {
-      setLoading(false);
       setError(false);
       setErrorDetails(null);
     }
   };
 
-  return { getMovieSuggestionGemini, loading, error, errorDetails };
+  return { getMovieSuggestionGemini, error, errorDetails };
 };

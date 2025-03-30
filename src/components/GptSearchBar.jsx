@@ -12,15 +12,22 @@ const GptSearchBar = () => {
   const dispatch = useDispatch();
 
   //Movie given by Gemini
-  const { getMovieSuggestionGemini, loading, error, errorDetails } =
+  const { getMovieSuggestionGemini, error, errorDetails } =
     useMovieSuggestionGemini();
 
   //Movie given by TMDB Search
-  const { SearchTmdbMovie, tmdbLoading } = useSearchTmdbMovie();
+  const { SearchTmdbMovie } = useSearchTmdbMovie();
 
   const handleGptClick = async () => {
     if (inputRef.current?.value) {
       const inputData = inputRef.current.value;
+
+      dispatch(
+        setMoviesByGeminiAndTmdbSearch({
+          loadingGemini: true,
+          loadingTmdb: true,
+        })
+      );
 
       const movieDataFromGemini = await getMovieSuggestionGemini(inputData);
       const movieDataFromGeminiArray = movieDataFromGemini.split(",");
@@ -37,10 +44,10 @@ const GptSearchBar = () => {
         setMoviesByGeminiAndTmdbSearch({
           moviesNamesByGemini: movieDataFromGeminiArray,
           moviesNamesByTmdbSearch: tmdbResult,
-          loadingGemini: loading,
+          loadingGemini: false,
           errorGemini: error,
           errorDetailsGemini: errorDetails,
-          loadingTmdb: tmdbLoading,
+          loadingTmdb: false,
         })
       );
     }

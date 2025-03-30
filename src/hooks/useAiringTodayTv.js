@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addAiringTodayTv } from "../store/movieSlice";
 import { NOW_PLAYING_OPTIONS } from "../utils/constants";
+import { useSelector } from "react-redux";
 
 export const useAiringTodayTv = () => {
   const dispatch = useDispatch();
+  const airingTodayTv = useSelector((store) => store.movies.airingTodayTv);
 
   const airingToday = async () => {
     try {
@@ -20,6 +22,6 @@ export const useAiringTodayTv = () => {
   };
 
   useEffect(() => {
-    airingToday();
+    if (!airingTodayTv) airingToday();
   }, []);
 };

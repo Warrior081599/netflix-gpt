@@ -24,5 +24,9 @@ dist-ssr
 *.sln
 *.sw?
 
+
 # Environment and API keys
- src/utils/constants.js
+.env
+.env.local
+.env.development
+.env.production
