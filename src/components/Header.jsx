@@ -98,7 +98,10 @@ const Header = () => {
           <div className="flex">
             <button
               onClick={handleGptSearch}
-              className="bg-red-800 rounded-lg  px-5 h-13  mt-5 cursor-pointer  text-white transition duration-300 ease-in-out hover:scale-110 active:scale-110"
+              className="bg-red-800 rounded-lg px-2 sm:px-3 md:px-5 
+            h-10 sm:h-12 md:h-13 mt-5 text-xs sm:text-sm md:text-base
+            cursor-pointer text-white transition duration-300 
+            hover:scale-110 active:scale-110"
             >
               {gptSearchValue ? "Homepage" : "AI Recommended Movies"}
             </button>
@@ -108,7 +111,13 @@ const Header = () => {
             className="w-12 h-12 mx-4 my-5"
           ></img> */}
             <button
-              className=" text-white cursor-pointer bg-red-800 w-[150px] h-[50px] px-5 py-2 rounded-lg mt-5 ml-5 transition duration-300 ease-in-out hover:scale-110 active:scale-110  "
+              className="text-white cursor-pointer bg-red-800 
+            w-[100px] sm:w-[120px] md:w-[150px] 
+            h-10 sm:h-12 md:h-[50px] 
+            px-2 sm:px-3 md:px-5 py-1 sm:py-1 md:py-2 
+            rounded-lg mt-5 ml-2 sm:ml-3 md:ml-5 
+            text-xs sm:text-sm md:text-base
+            transition duration-300 ease-in-out hover:scale-110 active:scale-110"
               onClick={handleSignOut}
             >
               Sign out

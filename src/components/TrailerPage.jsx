@@ -46,10 +46,13 @@ const TrailerPage = () => {
     <div className="bg-black min-h-screen">
       <Header />
 
-      <div className="pt-24 px-4">
+      <div className="pt-28 sm:pt-28 md:pt-24 px-4">
         <button
           onClick={() => navigate("/browse")}
-          className=" text-lg  bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-4 transition duration-300 cursor-pointer "
+          className="text-white bg-red-600 hover:bg-red-700 font-bold 
+              py-2 px-3 text-sm sm:text-base md:text-lg 
+              rounded mb-4 transition duration-300 cursor-pointer
+              relative z-50 mt-20 ml-10 sm:mt-2 md:mt-0 "
         >
           ← Back to Browse
         </button>
