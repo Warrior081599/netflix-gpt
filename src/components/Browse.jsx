@@ -9,10 +9,14 @@ import { useAiringTodayTv } from "../hooks/useAiringTodayTv";
 import { useOnTheAirTv } from "../hooks/useOnTheAirTv";
 import { usePopularTv } from "../hooks/usePopularTv";
 import { useTopRatedTv } from "../hooks/useTopRatedTv";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import GptSearch from "./GptSearch";
+import MovieTrailerModal from "./MovieTrailerModal";
+import { clearSelectedMovie, clearTrailerVideo } from "../store/movieSlice";
 
 const Browse = () => {
+  const dispatch = useDispatch();
+
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
@@ -23,6 +27,12 @@ const Browse = () => {
   useTopRatedTv();
 
   const gptSearchValue = useSelector((store) => store.gpt.showGptSearch);
+  const selectedMovieId = useSelector((store) => store.movies.selectedMovieId);
+
+  const handleCloseModal = () => {
+    dispatch(clearSelectedMovie());
+    dispatch(clearTrailerVideo());
+  };
 
   return (
     <div className="">
@@ -34,6 +44,12 @@ const Browse = () => {
         </>
       )}
       {gptSearchValue && <GptSearch />}
+      {selectedMovieId && (
+        <MovieTrailerModal
+          movieId={selectedMovieId}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };

@@ -2,11 +2,9 @@ import { NOW_PLAYING_OPTIONS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addTrailerVideo } from "../store/movieSlice";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 
 export const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
-  const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -28,8 +26,6 @@ export const useMovieTrailer = (movieId) => {
       }
     };
 
-    if (!trailerVideo) {
-      getMovies();
-    }
-  }, [movieId, trailerVideo]);
+    getMovies();
+  }, [movieId, dispatch]);
 };
