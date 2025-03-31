@@ -2,6 +2,10 @@
 
 A full-featured Netflix clone built with React, Redux, and Firebase, featuring AI-powered movie recommendations through Google's Gemini AI.
 
+## Live Demo
+
+Check out the live application: [Netflix Clone with Gemini AI](https://azad-net-flix-gemini-ai-tmdb-project.netlify.app/)
+
 ## Table of Contents
 
 - [Features](#features)
@@ -76,7 +80,7 @@ A full-featured Netflix clone built with React, Redux, and Firebase, featuring A
 
 ## Demo
 
-_Note: Add screenshots or a live demo link here when your application is deployed._
+Visit the live application: [Netflix Clone with Gemini AI](https://azad-net-flix-gemini-ai-tmdb-project.netlify.app/)
 
 ## Installation
 
