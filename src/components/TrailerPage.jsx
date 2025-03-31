@@ -12,19 +12,12 @@ const TrailerPage = () => {
   const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
   const navigate = useNavigate();
 
-  // Log the movieId to confirm it's being extracted correctly
-  console.log("TrailerPage mounted with movieId:", movieId);
-
   // Fetch trailer when component mounts
-  useEffect(() => {
-    console.log("Fetching trailer for movie ID:", movieId);
-    // No cleanup necessary in this effect
-  }, [movieId]);
+  useEffect(() => {}, [movieId]);
 
   // Use a separate effect for cleanup
   useEffect(() => {
     return () => {
-      console.log("TrailerPage unmounting, cleaning up");
       dispatch(clearTrailerVideo());
     };
   }, [dispatch]);
